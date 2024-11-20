@@ -41,7 +41,7 @@ ohw_data = ohw(data)
 df = pd.DataFrame(data = {'Ice Cream flavors': ['chocolate', 'vanilla', 'strawberry cheesecake'], 'Ranking': [3, 2, 1]})
 
 
-st.title('My Cool Name App')
+st.title('My Cool App')
 # st.dataframe(df)
 
 with st.sidebar:
@@ -49,15 +49,18 @@ with st.sidebar:
     year_input = st.slider('Year', min_value =1880, max_value=2023, value = 2000)
     n_names = st.radio('Number of names per sex', [3,5,10])
 
-tab1, tab2 = st.tabs(["Names", "Year"]) 
+
+tab1, tab2, tab3, tab4 = st.tabs(["Names", "Year", "Sexes", "One Hit Wonders"]) 
  
 with tab1: 
     # tab 1 contents 
 
     name_data = data[data['name'] == input_name].copy()
     fig = px.line(name_data, x='year', y='count', color='sex')
+    fig3 = name_sex_balance_plot(data, input_name)
 
     st.plotly_chart(fig)
+    st.plotly_chart(fig3)
  
 with tab2: 
     # tab 2 contents 
@@ -65,3 +68,21 @@ with tab2:
 
     st.plotly_chart(fig2)
     st.dataframe(unique_names_summary(data, 2000))
+
+
+with tab3:
+    # tab4 content
+    table_one_hits = one_hit_wonders(ohw(data))
+
+    st.dataframe(table_one_hits)
+
+#     Your app should have at least the following elements:
+
+#     four input widgets
+#     one graph that updates based on an input 
+#     three other text, tables, or graphs that update based on an input
+#     two tabs
+#     a sidebar 
+#     one other container or layout element
+
+#     Deploy your app using GitHub and Streamlit Community Cloud

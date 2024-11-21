@@ -48,6 +48,7 @@ with st.sidebar:
     input_name = st.text_input('Enter a name:')
     year_input = st.slider('Year', min_value =1880, max_value=2023, value = 2000)
     n_names = st.radio('Number of names per sex', [3,5,10])
+    sex_choice = st.segmented_control("Filter by Sex", ['Male', 'Female', 'All'])
 
 
 tab1, tab2 = st.tabs(["Names", "Year"]) 
@@ -56,7 +57,13 @@ with tab1:
     # tab 1 contents 
 
     name_data = data[data['name'] == input_name].copy()
-    fig = px.line(name_data, x='year', y='count', color='sex')
+
+    if(sex_choice != 'All'):
+        name_data = name_data[name_data['sex'] == sex_choice].copy()
+        fig = px.line(name_data, x='year', y='count')
+    else:
+        fig = px.line(name_data, x='year', y='count', color='sex')
+    
     fig3 = name_sex_balance_plot(data, input_name)
 
     st.plotly_chart(fig)
@@ -67,16 +74,15 @@ with tab2:
     fig2 = top_names_plot(data, n=n_names, year=year_input)
     table_one_hits = one_hit_wonders(ohw_data, year=year_input)
 
-    col1, col2 = st.columns(2)
-
     st.plotly_chart(fig2)
+    col1, col2 = st.columns(2)
 
     with col1:
         st.header(f'Unique Names') # for year {year_input}')
         st.dataframe(unique_names_summary(data, year=year_input))
     with col2:
         st.header(f'One Hit Wonders') # for year {year_input}')
-        st.dataframe(table_one_hits)    
+        st.text(table_one_hits)    
 
     
 

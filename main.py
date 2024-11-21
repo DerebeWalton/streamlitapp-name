@@ -50,7 +50,7 @@ with st.sidebar:
     n_names = st.radio('Number of names per sex', [3,5,10])
 
 
-tab1, tab2, tab3, tab4 = st.tabs(["Names", "Year", "Sexes", "One Hit Wonders"]) 
+tab1, tab2, tab3, tab4 = st.tabs(["Names", "Year", "One Hit Wonders"]) 
  
 with tab1: 
     # tab 1 contents 
@@ -65,16 +65,25 @@ with tab1:
 with tab2: 
     # tab 2 contents 
     fig2 = top_names_plot(data, n=n_names, year=year_input)
+    table_one_hits = one_hit_wonders(ohw(data, year_input))
+
+    col1, col2 = st.columns(2)
 
     st.plotly_chart(fig2)
-    st.dataframe(unique_names_summary(data, 2000))
+
+    with col1:
+        st.header(f'Unique Names for year {year_input}')
+        st.dataframe(unique_names_summary(data, year=year_input))
+    with col2:
+        st.header(f'One Hit Wonders for year {year_input}')
+        st.dataframe(table_one_hits)
 
 
 with tab3:
-    # tab4 content
-    table_one_hits = one_hit_wonders(ohw(data))
+    # tab3 content
+    
 
-    st.dataframe(table_one_hits)
+    
 
 #     Your app should have at least the following elements:
 

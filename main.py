@@ -59,7 +59,7 @@ with tab1:
     name_data = data[data['name'] == input_name].copy()
 
     if(sex_choice != 'All'):
-        name_data = name_data[name_data['sex'] == sex_choice].copy()
+        name_data = name_data[name_data['sex'] == sex_choice]
         fig = px.line(name_data, x='year', y='count', title = f'Sex: {sex_choice}')
     else :
         fig = px.line(name_data, x='year', y='count', color='sex')

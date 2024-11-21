@@ -65,17 +65,17 @@ with tab1:
 with tab2: 
     # tab 2 contents 
     fig2 = top_names_plot(data, n=n_names, year=year_input)
-    table_one_hits = one_hit_wonders(ohw(data, year_input))
+    table_one_hits = one_hit_wonders(ohw_data, year=year_input)
 
     col1, col2 = st.columns(2)
 
     st.plotly_chart(fig2)
 
     with col1:
-        st.header(f'Unique Names for year {year_input}')
+        st.header(f'Unique Names') # for year {year_input}')
         st.dataframe(unique_names_summary(data, year=year_input))
     with col2:
-        st.header(f'One Hit Wonders for year {year_input}')
+        st.header(f'One Hit Wonders') # for year {year_input}')
         st.dataframe(table_one_hits)    
 
     

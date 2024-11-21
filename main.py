@@ -76,22 +76,17 @@ with tab2:
         st.dataframe(unique_names_summary(data, year=year_input))
     with col2:
         st.header(f'One Hit Wonders for year {year_input}')
-        st.dataframe(table_one_hits)
-
-
-with tab3:
-    # tab3 content
-    
+        st.dataframe(table_one_hits)    
 
     
 
 #     Your app should have at least the following elements:
 
 #     four input widgets
-#     one graph that updates based on an input 
-#     three other text, tables, or graphs that update based on an input
-#     two tabs
-#     a sidebar 
-#     one other container or layout element
+#     +one graph that updates based on an input 
+#     +three other text, tables, or graphs that update based on an input
+#     +two tabs
+#     +a sidebar 
+#     +one other container or layout element
 
 #     Deploy your app using GitHub and Streamlit Community Cloud

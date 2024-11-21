@@ -129,8 +129,9 @@ def name_sex_balance_plot(df, name='John'):
             fig, ax = plt.subplots(figsize=(10, 2))
 
             # Create a stacked bar representing male and female ratios
-            ax.barh(0, male_ratio, color=color_map['M'], label='Male', height=0.5)
-            ax.barh(0, female_ratio, left=male_ratio, color=color_map['F'], label='Female', height= 0.5)
+            ax.barh([0,0], [male_ratio, female_ratio], left=[0,male_ratio], color=color_map.value, label=['Male', 'Female'])
+            # ax.barh(0, male_ratio, color=color_map['M'], label='Male')
+            # ax.barh(0, female_ratio, left=male_ratio, color=color_map['F'], label='Female')
 
             # Customize the chart
             ax.set_xlim(0, 1)

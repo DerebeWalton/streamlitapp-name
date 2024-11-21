@@ -60,10 +60,8 @@ with tab1:
 
     if(sex_choice != 'All'):
         name_data = name_data[name_data['sex'] == sex_choice].copy()
-        fig = px.line(name_data, x='year', y='count')
-    else:
-        fig = px.line(name_data, x='year', y='count', color='sex')
     
+    fig = px.line(name_data, x='year', y='count', color='sex')
     fig3 = name_sex_balance_plot(data, input_name)
 
     st.plotly_chart(fig)

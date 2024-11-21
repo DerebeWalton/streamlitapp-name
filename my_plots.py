@@ -129,9 +129,8 @@ def name_sex_balance_plot(df, name='John'):
             fig, ax = plt.subplots(figsize=(10, 2))
 
             # Create a stacked bar representing male and female ratios
-            ax.barh(y = [male_ratio, female_ratio], style = 'stacked')
-            # ax.barh(0, male_ratio, color='#636EFA', label='Male')
-            # ax.barh(0, female_ratio, left=male_ratio, color="#EF553B", label='Female')
+            ax.barh(0, male_ratio, color='#636EFA', label='Male')
+            ax.barh(0, female_ratio, left=male_ratio, color="#EF553B", label='Female')
 
             # Customize the chart
             ax.set_xlim(0, 1)
@@ -179,9 +178,11 @@ def unique_names_summary(df, year=1977):
 def one_hit_wonders(ohw_data, year=1977):
     
     ohw_year = ohw_data[ohw_data['year']==year]
+    output = None
 
     if ohw_year.empty:
         print(f"No one-hit wonders found in {year}")
+        output = f"No one-hit wonders found in {year}"
     else:
         one_hit_wonder_counts = ohw_year['sex'].value_counts()
         common_one_hit_wonders = ohw_year.groupby(['name', 'sex'])['count'].sum().reset_index()
@@ -196,5 +197,9 @@ def one_hit_wonders(ohw_data, year=1977):
 
             print(f"Most common female one-hit wonder: {most_common_female['name']} with {most_common_female['count']} occurrences")
             print(f"Most common male one-hit wonder: {most_common_male['name']} with {most_common_male['count']} occurrences")
+            
+            output = f"Summary of One-Hit Wonders in {year}: \n Number of female one-hit wonders: {one_hit_wonder_counts.get('F', 0)}\n Number of male one-hit wonders: {one_hit_wonder_counts.get('M', 0)} \nMost common female one-hit wonder: {most_common_female['name']} with {most_common_female['count']} occurrences \n Most common male one-hit wonder: {most_common_male['name']} with {most_common_male['count']} occurrences"
         except:
             print(f"Not enough data to calculate one-hit wonders by sex in {year}")
+            output = f"Not enough data to calculate one-hit wonders by sex in {year}"
+    return output

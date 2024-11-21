@@ -50,7 +50,7 @@ with st.sidebar:
     n_names = st.radio('Number of names per sex', [3,5,10])
 
 
-tab1, tab2, tab3, tab4 = st.tabs(["Names", "Year", "One Hit Wonders"]) 
+tab1, tab2 = st.tabs(["Names", "Year"]) 
  
 with tab1: 
     # tab 1 contents 
